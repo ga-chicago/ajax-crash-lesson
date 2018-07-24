@@ -1,16 +1,18 @@
 console.log("js ajax")
 
 
-
-const num = 5;
-
 // jquery ajax function -- takes an object of options including 2 methods, 
 // one for success and one for fail
 
 $('#poke-go').on('click', () => {
   console.log("click ", $('#poke-chooser').val())
   $.ajax({
-    url: "http://localhost:3003/api/" + $('#poke-chooser').val(),
+    url: "http://localhost:3003/api/" + $('#poke-chooser').val(), // this used to link directly to 
+                                                                  // third party API
+                                                                  // but was giving us CORS errors 
+                                                                  // unless we used the https hack
+                                                                  // so we made our own "API"
+                                                                  // that hits the real API and returns JSON
     method: "GET",
     dataType: 'json',
     success: function(response) {
@@ -43,7 +45,7 @@ $('#weather-btn').on('click', (e) => {
       }) 
     },  
     fail: function(error) {
-
+      console.error("error")
     }
   })
   
